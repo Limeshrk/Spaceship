@@ -7,39 +7,51 @@
 // let Speedometer = 0;
 
 const spaceship = {
-  fuel: 400,
-  passengers: [John, Steve, Sam, Danielle],
-  shields: true,
-  speedometer: 0,
-  listPassengers: function () {
-    for (let i = 0; i < Passengers.length; i++) {
-      console.log(Passengers[i]);
+  Fuel: 400,
+  Passengers: ["John", "Steve", "Sam", "Danielle"],
+  Shields: true,
+  Speedometer: 0,
+  listPassengers() {
+    for (let i = 0; i < this.Passengers.length; i++) {
+      console.log(this.Passengers[i]);
     }
   },
-  addPassenger: function (newPassenger) {
-    Passengers.push(newPassenger);
+  addPassenger(newPassenger) {
+    this.Passengers.push(newPassenger);
     console.log(newPassenger, "was added to the ship");
   },
-  travel: function (distance) {
+  travel(distance) {
     console.log("Trying to travel:", distance);
-    if (fuel == 0) {
+    //check for empty tank
+    if (this.Fuel == 0) {
       console.log("Can't go further, tank is empty...");
+    } else {
+      //calculate needed fuel for the trip
+      let neededFuel = distance / 2;
+      //if NOT ENOUGH, set doable distance and zero fuel
+      if (neededFuel > this.Fuel) {
+        distance = 2 * this.Fuel;
+        this.Fuel = 0;
+      }
+      //Normal Trip Case
+      else {
+        spaceship.Fuel = spaceship.Fuel - distance / 2;
+      }
+      //Do the travel and status
+      this.Speedometer = this.Speedometer + distance;
+      console.log("The Spaceship is at:", this.Speedometer);
+      console.log("The Spaceship has:", this.Fuel, "fuel remaining");
+
+      //check shields after arrival
+      if (this.Fuel < 30 && this.Shields == true) {
+        this.Shields = false;
+        console.log("Fuel is low, turning off shields... ");
+      }
     }
-    fuel = fuel - distance / 2;
-    if (fuel < 0) {
-      distance = distance - fuel * -2;
-      fuel = 0;
-    }
-    speedometer = speedometer + distance;
-    if (fuel < 30) {
-      shields = false;
-      console.log("Fuel is low, turning off shields... ");
-    }
-    console.log("The Spaceship is at:", speedometer);
-    console.log("The Spaceship has:", fuel, "fuel remaining");
   },
 };
 
+//function for quick testing
 function spaceadventure() {
   spaceship.listPassengers();
   spaceship.addPassenger("Lindsay");
