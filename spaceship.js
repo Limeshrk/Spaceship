@@ -1,4 +1,4 @@
-const spaceShip = {
+const spaceship = {
   Fuel: 400,
   Passengers: ["John", "Steve", "Sam", "Danielle"],
   Shields: true,
@@ -14,41 +14,38 @@ const spaceShip = {
   },
   travel(distance) {
     console.log("Trying to travel:", distance);
-    //check for empty tank
+    //check IF empty tank
     if (this.Fuel == 0) {
       console.log("Can't go further, tank is empty...");
     } else {
-      //calculate needed fuel for the trip
+      //calculate needed fuel left after the trip
       this.Fuel = this.Fuel - distance / 2;
-      //if NOT ENOUGH, set doable distance and zero fuel
-      if (this.Fuel < 0) {
-        distance = distance - this.Fuel * -2;
-        this.Fuel = 0;
-      }
-      //Normal Trip Case
-      else {
-        this.Fuel = this.Fuel - distance / 2;
-      }
-      //Do the travel and status
-      this.Speedometer = this.Speedometer + distance;
-      console.log("The Spaceship is at:", this.Speedometer);
-      console.log("The Spaceship has:", this.Fuel, "fuel remaining");
-
-      //check shields after arrival
+      //check shields
       if (this.Fuel < 30 && this.Shields == true) {
         this.Shields = false;
         console.log("Fuel is low, turning off shields... ");
       }
+      //IF negative left (not enough), set doable distance and zero fuel
+      if (this.Fuel < 0) {
+        distance = distance - this.Fuel * -2;
+        console.log("Fuel is low, can only travel:", distance);
+        this.Fuel = 0;
+      }
+      //Do the travel and status
+      this.Speedometer = this.Speedometer + distance;
+
+      console.log("The Spaceship is at:", this.Speedometer);
+      console.log("The Spaceship has:", this.Fuel, "fuel remaining");
     }
   },
 };
 
 //function for quick testing
 function spaceadventure() {
-  spaceShip.listPassengers();
-  spaceShip.addPassenger("Lindsay");
-  spaceShip.listPassengers();
-  spaceShip.travel(750);
-  spaceShip.travel(200);
-  spaceShip.travel(100);
+  spaceship.listPassengers();
+  spaceship.addPassenger("Lindsay");
+  spaceship.listPassengers();
+  spaceship.travel(750);
+  spaceship.travel(200);
+  spaceship.travel(100);
 }
