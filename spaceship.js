@@ -1,4 +1,4 @@
-const spaceship = {
+const spaceShip = {
   Fuel: 400,
   Passengers: ["John", "Steve", "Sam", "Danielle"],
   Shields: true,
@@ -45,10 +45,10 @@ const spaceship = {
 
 //function for quick testing
 function spaceadventure() {
-  spaceship.listPassengers();
-  spaceship.addPassenger("Lindsay");
-  spaceship.listPassengers();
-  spaceship.travel(750);
-  spaceship.travel(200);
-  spaceship.travel(100);
+  spaceShip.listPassengers();
+  spaceShip.addPassenger("Lindsay");
+  spaceShip.listPassengers();
+  spaceShip.travel(750);
+  spaceShip.travel(200);
+  spaceShip.travel(100);
 }
