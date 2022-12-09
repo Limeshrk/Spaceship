@@ -1,11 +1,3 @@
-//Travels (fuel consumption: distance/2) */
-//Stored variables for testing
-// let newPassenger = Lindsay;
-// let fuel = 400;
-// let Passengers = [John, Steve, Sam, Danielle];
-// let Shields = true;
-// let Speedometer = 0;
-
 const spaceship = {
   Fuel: 400,
   Passengers: ["John", "Steve", "Sam", "Danielle"],
@@ -27,15 +19,15 @@ const spaceship = {
       console.log("Can't go further, tank is empty...");
     } else {
       //calculate needed fuel for the trip
-      let neededFuel = distance / 2;
+      this.Fuel = this.Fuel - distance / 2;
       //if NOT ENOUGH, set doable distance and zero fuel
-      if (neededFuel > this.Fuel) {
-        distance = 2 * this.Fuel;
+      if (this.Fuel < 0) {
+        distance = distance - this.Fuel * -2;
         this.Fuel = 0;
       }
       //Normal Trip Case
       else {
-        spaceship.Fuel = spaceship.Fuel - distance / 2;
+        this.Fuel = this.Fuel - distance / 2;
       }
       //Do the travel and status
       this.Speedometer = this.Speedometer + distance;
